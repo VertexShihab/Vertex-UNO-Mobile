@@ -1,0 +1,12 @@
+{
+  "name": "uno-game",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'No build step required for vanilla JS'"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  }
+}

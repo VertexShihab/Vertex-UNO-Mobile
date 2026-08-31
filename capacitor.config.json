@@ -1,0 +1,6 @@
+{
+  "appId": "com.shihab.unogame",
+  "appName": "Uno Game",
+  "webDir": ".",
+  "bundledWebRuntime": false
+}

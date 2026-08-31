@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Play UNO card game — Solo or 2v2 Duo mode with AI opponents. UNO Steam-style premium mobile experience.">
+    <title>UNO — Card Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Bebas+Neue&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- App Icon -->
+    <link rel="icon" href="assets/icon.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="assets/icon.jpg">
+    <!-- PWA Meta -->
+    <meta name="theme-color" content="#081209">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="UNO">
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SPLASH / OPENING SCREEN — Cinematic Steam Style
+         ═══════════════════════════════════════════════════════ -->
+    <div id="splash-screen" class="screen active">
+        <div class="splash-bg">
+            <!-- Felt background -->
+            <div class="splash-felt"></div>
+
+            <!-- Ambient light rays -->
+            <div class="splash-rays"></div>
+
+            <!-- Gold oval ring -->
+            <div class="splash-oval-ring"></div>
+
+            <!-- Card fan at bottom -->
+            <div class="splash-card-fan">
+                <div class="fan-card fc1"><img src="assets/cards/Red_7.png"       alt="" draggable="false"></div>
+                <div class="fan-card fc2"><img src="assets/cards/Blue_Reverse.png" alt="" draggable="false"></div>
+                <div class="fan-card fc3"><img src="assets/cards/Green_5.png"     alt="" draggable="false"></div>
+                <div class="fan-card fc4"><img src="assets/cards/Yellow_9.png"    alt="" draggable="false"></div>
+                <div class="fan-card fc5"><img src="assets/cards/Wild.png"        alt="" draggable="false"></div>
+                <div class="fan-card fc6"><img src="assets/cards/Red_Skip.png"    alt="" draggable="false"></div>
+            </div>
+
+            <!-- UNO Logo -->
+            <div class="splash-logo-container">
+                <img src="assets/icon.jpg" alt="UNO" class="splash-icon" id="splash-icon">
+                <div class="splash-title">UNO</div>
+                <div class="splash-divider"></div>
+                <div class="splash-subtitle">CARD GAME</div>
+            </div>
+
+            <!-- Loading bar -->
+            <div class="splash-loader">
+                <div class="splash-loader-track">
+                    <div class="splash-loader-fill" id="splash-loader-fill"></div>
+                </div>
+                <div class="splash-loader-text">LOADING</div>
+            </div>
+
+            <!-- Tap to continue -->
+            <div class="splash-tap" id="splash-tap">TAP TO PLAY</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MENU SCREEN — Steam Main Menu Style
+         ═══════════════════════════════════════════════════════ -->
+    <div id="menu-screen" class="screen">
+        <!-- Animated background particles -->
+        <canvas id="particle-canvas"></canvas>
+
+        <div class="menu-content">
+            <!-- Logo Hero -->
+            <div class="menu-logo-area">
+                <img src="assets/Banner.png" alt="UNO" class="menu-logo" id="menu-logo">
+                <div class="menu-tagline">THE CLASSIC CARD GAME</div>
+            </div>
+
+            <!-- Game Modes -->
+            <div class="menu-modes">
+
+                <!-- Solo Modes -->
+                <div class="mode-section">
+                    <div class="mode-section-header">
+                        <span class="section-icon">⚔️</span>
+                        <span class="section-title">SOLO</span>
+                    </div>
+
+                    <button id="btn-solo-1v1" class="mode-btn">
+                        <div class="mode-btn-glow"></div>
+                        <div class="mode-btn-inner">
+                            <div class="mode-players">
+                                <span class="player-dot you"></span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-dot ai"></span>
+                            </div>
+                            <div class="mode-info">
+                                <span class="mode-name">1 vs 1</span>
+                                <span class="mode-desc">Duel an AI opponent</span>
+                            </div>
+                            <span class="mode-arrow">›</span>
+                        </div>
+                    </button>
+
+                    <button id="btn-solo-1v2" class="mode-btn">
+                        <div class="mode-btn-glow"></div>
+                        <div class="mode-btn-inner">
+                            <div class="mode-players">
+                                <span class="player-dot you"></span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-dot ai"></span>
+                                <span class="player-dot ai"></span>
+                            </div>
+                            <div class="mode-info">
+                                <span class="mode-name">1 vs 2</span>
+                                <span class="mode-desc">Face two opponents</span>
+                            </div>
+                            <span class="mode-arrow">›</span>
+                        </div>
+                    </button>
+
+                    <button id="btn-solo-1v3" class="mode-btn">
+                        <div class="mode-btn-glow"></div>
+                        <div class="mode-btn-inner">
+                            <div class="mode-players">
+                                <span class="player-dot you"></span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-dot ai"></span>
+                                <span class="player-dot ai"></span>
+                                <span class="player-dot ai"></span>
+                            </div>
+                            <div class="mode-info">
+                                <span class="mode-name">1 vs 3</span>
+                                <span class="mode-desc">Full table challenge</span>
+                            </div>
+                            <span class="mode-arrow">›</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Team Mode -->
+                <div class="mode-section">
+                    <div class="mode-section-header">
+                        <span class="section-icon">🤝</span>
+                        <span class="section-title">TEAM</span>
+                    </div>
+
+                    <button id="btn-duo" class="mode-btn mode-btn-special">
+                        <div class="mode-btn-glow special-glow"></div>
+                        <div class="mode-btn-inner">
+                            <div class="mode-players">
+                                <span class="player-dot you"></span>
+                                <span class="player-dot partner"></span>
+                                <span class="vs-text">VS</span>
+                                <span class="player-dot ai"></span>
+                                <span class="player-dot ai"></span>
+                            </div>
+                            <div class="mode-info">
+                                <span class="mode-name">Duo 2v2</span>
+                                <span class="mode-desc">Team up with an AI partner</span>
+                            </div>
+                            <span class="mode-arrow">›</span>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         GAME SCREEN — Steam Table Style
+         ═══════════════════════════════════════════════════════ -->
+    <div id="game-screen" class="screen">
+        <!-- Table surface -->
+        <div class="table-surface">
+            <div class="table-felt"></div>
+            <div class="table-vignette"></div>
+        </div>
+
+        <!-- Gold oval decorative ring -->
+        <div class="table-oval-ring"></div>
+
+        <!-- Turn flow ring -->
+        <div id="turn-ring" class="turn-ring">
+            <svg viewBox="0 0 300 300" class="turn-ring-svg">
+                <circle cx="150" cy="150" r="130" class="ring-track"/>
+                <circle cx="150" cy="150" r="130" class="ring-progress" id="ring-progress"/>
+            </svg>
+        </div>
+
+        <!-- Back to Menu button -->
+        <button id="btn-back-to-menu" class="back-btn" title="Main Menu">&#8592;</button>
+
+        <!-- Game Layout -->
+        <div class="game-table">
+
+            <!-- Top Player -->
+            <div id="player-top" class="player-seat seat-top hidden-seat">
+                <div class="seat-avatar">
+                    <div class="avatar-ring" id="avatar-ring-top">
+                        <div class="avatar-icon">🤖</div>
+                    </div>
+                    <span id="name-top" class="seat-name">Bot</span>
+                    <div class="card-badge" id="count-top">7</div>
+                    <span id="label-top" class="team-badge"></span>
+                </div>
+                <div id="hand-top" class="hand-zone hand-horizontal"></div>
+            </div>
+
+            <!-- Left Player -->
+            <div id="player-left" class="player-seat seat-left hidden-seat">
+                <div class="seat-avatar">
+                    <div class="avatar-ring" id="avatar-ring-left">
+                        <div class="avatar-icon">🤖</div>
+                    </div>
+                    <span id="name-left" class="seat-name">Bot</span>
+                    <div class="card-badge" id="count-left">7</div>
+                    <span id="label-left" class="team-badge"></span>
+                </div>
+                <div id="hand-left" class="hand-zone hand-vertical"></div>
+            </div>
+
+            <!-- Center Play Area -->
+            <div class="center-stage">
+                <!-- Direction indicator -->
+                <div id="direction-indicator" class="direction-indicator clockwise">
+                    <svg viewBox="0 0 100 100" class="dir-svg">
+                        <path d="M 50 10 A 40 40 0 1 1 10 50" fill="none" stroke="rgba(212,169,53,0.2)" stroke-width="2" stroke-linecap="round"/>
+                        <polygon points="8,42 18,50 8,58" fill="rgba(212,169,53,0.4)" class="dir-arrow"/>
+                    </svg>
+                </div>
+
+                <div class="piles-area">
+                    <div class="pile-wrapper discard-wrapper">
+                        <div id="discard-pile" class="pile discard-pile"></div>
+                        <div id="color-indicator" class="active-color">
+                            <div class="active-color-dot"></div>
+                            <span class="active-color-text">RED</span>
+                        </div>
+                    </div>
+                    <div class="pile-wrapper draw-wrapper">
+                        <div id="draw-pile" class="pile draw-pile">
+                            <img src="assets/cards/Deck.png" alt="Draw" class="draw-pile-img" draggable="false">
+                            <div class="draw-pile-stack"></div>
+                            <div class="draw-label">DRAW</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Player -->
+            <div id="player-right" class="player-seat seat-right hidden-seat">
+                <div class="seat-avatar">
+                    <div class="avatar-ring" id="avatar-ring-right">
+                        <div class="avatar-icon">🤖</div>
+                    </div>
+                    <span id="name-right" class="seat-name">Bot</span>
+                    <div class="card-badge" id="count-right">7</div>
+                    <span id="label-right" class="team-badge"></span>
+                </div>
+                <div id="hand-right" class="hand-zone hand-vertical"></div>
+            </div>
+
+            <!-- Bottom Player (Human) -->
+            <div id="player-bottom" class="player-seat seat-bottom">
+                <div class="hand-tray">
+                    <div id="hand-bottom" class="hand-zone hand-human"></div>
+                </div>
+                <div class="seat-avatar human-avatar">
+                    <div class="avatar-ring" id="avatar-ring-bottom">
+                        <div class="avatar-icon">😎</div>
+                    </div>
+                    <span id="name-bottom" class="seat-name">You</span>
+                    <div class="card-badge" id="count-bottom">7</div>
+                    <span id="label-bottom" class="team-badge"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status HUD (top pill) -->
+        <div id="game-status" class="game-hud">
+            <div class="hud-inner">
+                <span class="hud-text" id="hud-text">Your turn</span>
+            </div>
+        </div>
+
+        <!-- UNO Button -->
+        <button id="uno-btn" class="uno-btn">
+            <span class="uno-btn-text">UNO!</span>
+            <div class="uno-btn-ring"></div>
+        </button>
+
+        <!-- Color Chooser Modal -->
+        <div id="color-modal" class="color-modal">
+            <div class="color-modal-backdrop"></div>
+            <div class="color-chooser-card">
+                <div class="color-chooser-title">PICK A COLOR</div>
+                <div class="color-grid">
+                    <button class="color-pick" data-color="Red">
+                        <div class="color-pick-inner red-pick">
+                            <span>RED</span>
+                        </div>
+                    </button>
+                    <button class="color-pick" data-color="Blue">
+                        <div class="color-pick-inner blue-pick">
+                            <span>BLUE</span>
+                        </div>
+                    </button>
+                    <button class="color-pick" data-color="Green">
+                        <div class="color-pick-inner green-pick">
+                            <span>GREEN</span>
+                        </div>
+                    </button>
+                    <button class="color-pick" data-color="Yellow">
+                        <div class="color-pick-inner yellow-pick">
+                            <span>YELLOW</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Toast -->
+        <div id="action-log" class="action-toast"></div>
+
+        <!-- Reverse Animation Overlay -->
+        <div id="reverse-overlay" class="reverse-overlay">
+            <div class="reverse-icon">🔄</div>
+            <div class="reverse-text">REVERSE!</div>
+        </div>
+
+        <!-- Skip Animation Overlay -->
+        <div id="skip-overlay" class="skip-overlay">
+            <div class="skip-icon">🚫</div>
+            <div class="skip-text">SKIP!</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         RESULT SCREEN — Steam Win/Lose Style
+         ═══════════════════════════════════════════════════════ -->
+    <div id="result-screen" class="screen">
+        <canvas id="confetti-canvas"></canvas>
+        <div class="result-content">
+            <div class="result-frame">
+                <div class="result-trophy" id="result-trophy">🏆</div>
+                <h1 id="result-title" class="result-title">YOU WIN!</h1>
+                <div class="result-divider"></div>
+                <p id="result-message" class="result-message">Congratulations!</p>
+                <div class="result-actions">
+                    <button id="btn-play-again" class="action-btn primary-btn">
+                        <span class="btn-glow"></span>
+                        <span>PLAY AGAIN</span>
+                    </button>
+                    <button id="btn-main-menu" class="action-btn ghost-btn">
+                        <span>MAIN MENU</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/game.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
